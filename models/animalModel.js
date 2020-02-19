@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 mongoose.connect(
     'mongodb+srv://bovtester:bovcontrol@bovcontol-c8vnu.gcp.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
 });
 
 const animalSchema = new mongoose.Schema({
