@@ -1,6 +1,6 @@
 const models = require('../models/animals');
 const ApiError = require('../exceptions/ApiError');
-const validation = require('./validation');
+const validation = require('./validations');
 
 const getAnimalDTO = (animalData) => {
     return {

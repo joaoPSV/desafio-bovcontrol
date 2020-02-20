@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
+const mongoUser = process.env.mongoUser || 'bovtester';
+const mongoPass = process.env.mongoPass || 'bovcontrol';
+
 mongoose.connect(
-    'mongodb+srv://bovtester:bovcontrol@bovcontol-c8vnu.gcp.mongodb.net/test?retryWrites=true&w=majority', {
+    `mongodb+srv://${mongoUser}:${mongoPass}@bovcontol-c8vnu.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

@@ -1,5 +1,4 @@
 module.exports = (e) => {
-    // console.log(e);
     if(e.statusCode) {
         if(e.message)
             return {

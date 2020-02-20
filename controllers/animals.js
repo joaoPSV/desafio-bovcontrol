@@ -1,6 +1,6 @@
 const services = require('../services/animals');
 const exceptionHandler = require('../exceptions/exceptionHandler');
-const validation = require('../services/validation');
+const validation = require('../services/validations');
 
 module.exports = {
     read: async (req, res) => {
