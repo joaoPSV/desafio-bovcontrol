@@ -26,6 +26,7 @@ controller.get('/v1/animals/:id', async (req, res) => {
             data: result, 
         });
     } catch(e) {
+        console.log(e)
         const error = exceptionHandler(e);
         return res.status(error.status).json({ 
             msg: error.message,

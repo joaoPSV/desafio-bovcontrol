@@ -12,28 +12,16 @@ const getAnimalDTO = (animalData) => {
 
 module.exports = {
     create: async (data) => {
-        try {
-            let animal = await models.create(data);
-            return getAnimalDTO(animal);
-        } catch(e) {
-            throw e;
-        }
+        let animal = await models.create(data);
+        return getAnimalDTO(animal);
     },
 
     update: async (id, data) => {
-        try {
-            await models.update(id, data);
-        } catch(e) {
-            throw e;
-        }
+        await models.update(id, data);
     },
 
     read: async (id) => {
-        try {
-            let animal = await models.findById(id);
-            return getAnimalDTO(animal);
-        } catch(e) {
-            throw e;
-        }
+        let animal = await models.findById(id);
+        return getAnimalDTO(animal);
     }
 };

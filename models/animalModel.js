@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 mongoose.connect(
     'mongodb+srv://bovtester:bovcontrol@bovcontol-c8vnu.gcp.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 const animalSchema = new mongoose.Schema({
@@ -38,32 +39,20 @@ const animalSchema = new mongoose.Schema({
 
 const animalModel = mongoose.model('Animals', animalSchema);
 
-module.exports = { 
-    findById : async (id) => {
-        try {
-            let result = await animalModel.findById(id);
-            return result;
-        } catch(e) {
-            throw e;
-        }
+module.exports = {
+    findById: async (id) => {
+        let result = await animalModel.findById(id);
+        return result;
     },
 
     create: async (data) => {
-        try {
-            let newAnimal = new animalModel(data);
-            await newAnimal.save()
-            return newAnimal;
-        } catch(e) {
-            throw e;
-        }
+        let newAnimal = new animalModel(data);
+        await newAnimal.save()
+        return newAnimal;
     },
 
     update: async (id, data) => {
-        try {
-            data["updatedAt"] = new Date().getTime();
-            await animalModel.updateOne({ '_id': id }, data);
-        } catch(e) {
-            throw e;
-        }
+        data["updatedAt"] = new Date().getTime();
+        await animalModel.updateOne({ '_id': id }, data);
     }
 };
