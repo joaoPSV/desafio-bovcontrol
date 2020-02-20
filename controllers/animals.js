@@ -12,7 +12,7 @@ module.exports = {
         } catch(e) {
             const error = exceptionHandler(e);
             return res.status(error.status).json({ 
-                msg: error.message,
+                errors: error.messages,
             });
         }
     },
@@ -26,7 +26,7 @@ module.exports = {
         } catch(e) {
             const error = exceptionHandler(e);
             return res.status(error.status).json({ 
-                msg: error.message,
+                 errors: error.messages,
             });
         }
     },
@@ -42,7 +42,7 @@ module.exports = {
         } catch(e) {
             const error = exceptionHandler(e);
             return res.status(error.status).json({ 
-                msg: error.message,
+                 errors: error.messages,
             });
         }
     }
