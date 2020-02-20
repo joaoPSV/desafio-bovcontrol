@@ -19,7 +19,10 @@ module.exports = {
     },
 
     update: async (id, data) => {
-        await models.update(id, data);
+        let animal = await models.update(id, data);
+        if (!animal)
+            throw new ApiError("Animal não encontrado!", 404);
+        return getAnimalDTO(animal);
     },
 
     read: async (id) => {

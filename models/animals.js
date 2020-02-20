@@ -4,6 +4,7 @@ mongoose.connect(
     'mongodb+srv://bovtester:bovcontrol@bovcontol-c8vnu.gcp.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 });
 
 const animalSchema = new mongoose.Schema({
@@ -53,6 +54,7 @@ module.exports = {
 
     update: async (id, data) => {
         data["updatedAt"] = new Date().getTime();
-        await animalModel.updateOne({ '_id': id }, data);
+        let result = await animalModel.findOneAndUpdate({ '_id': id }, data, { new: true });
+        return result;
     }
 };

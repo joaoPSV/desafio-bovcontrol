@@ -11,28 +11,27 @@ router.use(
 );
 
 /** 
- * Retorna os dados do animal referente ao id recebido
+ * Return data from an animal referenced by id requested
  * 
- * @param {String} id
+ * @param {String} id (Required)
  */
 router.get('/:id', (req, res) => controller.read(req, res));
 
 /** 
- * Cria um animal
+ * Create an animal
  * 
- * @param {String} id
- * @param {String} name
- * @param {String} type
- * @param {Number} age
- * @param {Number} weight
+ * @param {String} name (Required)
+ * @param {String} type (Required)
+ * @param {Number} age (Required)
+ * @param {Number} weight (Required)
  */
 router.post('', (req, res) => controller.create(req, res));
 
 /** 
- * Atualiza os dados do animal referente ao id recebido
+ * Update data from an animal referenced by id requested
  * 
- * @param {String} id
- * @param {String} name
+ * @param {String} id (Required)
+ * @param {String} name 
  * @param {String} type
  * @param {Number} age
  * @param {Number} weight
@@ -42,7 +41,7 @@ router.put('/:id', (req, res) => controller.update(req, res));
 app.use('/v1/animals', router);
 
 /**
- * Caso a rota requisitada não exista
+ * IF route not exists
  */
 app.use((req, res) => res.status(404).json({ msg: "Rota não encontrada!" }));
 
