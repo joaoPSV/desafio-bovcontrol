@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const animalTypes = require('../enums/animalTypes');
+
 const mongoUser = process.env.mongoUser || 'bovtester';
 const mongoPass = process.env.mongoPass || 'bovcontrol';
 
@@ -25,6 +27,7 @@ const animalSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
+        enum: animalTypes,
     },
     name: {
         type: String,

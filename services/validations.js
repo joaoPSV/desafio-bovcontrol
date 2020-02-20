@@ -2,6 +2,7 @@ const Joi = require('@hapi/joi');
 const mongoose = require('mongoose');
 
 const ApiError = require('../exceptions/ApiError');
+const animalTypes = require('../enums/animalTypes');
 
 const formatException = (errors) => {
     var messages = [];
@@ -41,6 +42,9 @@ const formatException = (errors) => {
             case "string.empty":
                 message = `o atributo ${err.path[0]} não pode ser uma string vazia`;
                 break;
+            case "any.only":
+                message = `o atributo ${err.path[0]} não pertence as opções pré definidas `;
+                break;
             default:
                 message = 'Não foi possível identificar o erro';
                 break;
@@ -58,7 +62,7 @@ module.exports = {
 
         weight: Joi.number().positive().required(),
 
-        type: Joi.string().required()
+        type: Joi.string().valid(...animalTypes).required()
     }).error(errors => formatException(errors)),
 
     updateAnimal: Joi.object({
@@ -68,7 +72,7 @@ module.exports = {
 
         weight: Joi.number().positive(),
 
-        type: Joi.string()
+        type: Joi.string().valid(...animalTypes)
     }).or('name', 'age', 'weight', 'type')
         .error(errors => formatException(errors)),
 
