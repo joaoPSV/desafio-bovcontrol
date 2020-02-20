@@ -44,12 +44,13 @@ npm test
 
 ```
 
-### Obs: Caso seja necessário alterar a porta que roda o serviço, criar um arquivo .env dentro do diretório do projeto com as seguintes informações:
+#### Obs: Caso seja necessário alterar a porta que roda o serviço, criar um arquivo .env dentro do diretório do projeto com as seguintes informações:
 
 ```
 PORT=<Porta>
 ```
 
+Por padrão utilizaremos a porta: <b>8080</b>
 
 ### Segue exemplos de requisições possíveis, que retornarão êxito:
 
