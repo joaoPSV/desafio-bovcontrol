@@ -1,4 +1,6 @@
 const Joi = require('@hapi/joi');
+const mongoose = require('mongoose');
+
 const ApiError = require('../exceptions/ApiError');
 
 const formatException = (errors) => {
@@ -23,6 +25,9 @@ const formatException = (errors) => {
         case "number.positive":
             message = `o atributo ${err.path[0]} precisa ser um número positivo`;
             break;
+        case "number.min": 
+            message = `o atributo ${err.path[0]} precisa ser um número maior ou igual a 0`;
+            break;
         case "string.base":
             message = `o atributo ${err.path[0]} precisa ser uma string`;
             break;
@@ -31,6 +36,9 @@ const formatException = (errors) => {
             break;
         case "string.alphanum":
             message = `o atributo ${err.path[0]} precisa ser uma string alfanumérica`;
+            break;
+        case "string.empty":
+            message = `o atributo ${err.path[0]} não pode ser uma string vazia`;
             break;
         default:
             break;
@@ -42,7 +50,7 @@ module.exports = {
     createAnimal: Joi.object({
         name: Joi.string().min(3).alphanum().required(),
 
-        age: Joi.number().integer().positive().required(),
+        age: Joi.number().integer().min(0).required(),
 
         weight: Joi.number().positive().required(),
 
@@ -59,4 +67,6 @@ module.exports = {
         type: Joi.string()
     }).or('name', 'age', 'weight', 'type')
         .error(errors => formatException(errors)),
+
+    objectId: (id) => mongoose.Types.ObjectId.isValid(id),
 };

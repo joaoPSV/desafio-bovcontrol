@@ -1,4 +1,6 @@
-const models = require('../models/animalModel');
+const models = require('../models/animals');
+const ApiError = require('../exceptions/ApiError');
+const validation = require('./validation');
 
 const getAnimalDTO = (animalData) => {
     return {
@@ -22,6 +24,13 @@ module.exports = {
 
     read: async (id) => {
         let animal = await models.findById(id);
+        if (!animal)
+            throw new ApiError("Animal não encontrado!", 404);
         return getAnimalDTO(animal);
+    },
+
+    validateObjectId: (id) => {
+        if (!validation.objectId(id))
+            throw new ApiError("Id inválido!", 422);
     }
 };
