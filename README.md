@@ -44,7 +44,7 @@ npm test
 
 ```
 
-#### Obs: Caso seja necessário alterar a porta que roda o serviço, criar um arquivo .env dentro do diretório do projeto com as seguintes informações:
+#### Obs1: Caso seja necessário alterar a porta que roda o serviço, criar um arquivo .env dentro do diretório do projeto com as seguintes informações:
 
 ```
 PORT=<Porta>
@@ -52,11 +52,25 @@ PORT=<Porta>
 
 Por padrão utilizaremos a porta: <b>8080</b>
 
+### Obs2: O atributo type estará sendo validado se baseando no seguinte Enum
+
+```
+[
+	'COW',
+    'GOAT',
+    'CHICKEN',
+    'HORSE',
+    'SHEEP',
+    'DUCK',
+    'PIG'
+]
+```
+
 ### Segue exemplos de requisições possíveis, que retornarão êxito:
 
 <h4 style="color:green">GET</h1>
 
-/v1/animals/5e4e1b0316577a22d811a06e
+/v1/animals/5e4e9553734ae947c5702950
 
 <h4 style="color:yellow">POST</h1>
 
@@ -74,11 +88,11 @@ Com o seguinte Body:
 
 <h4 style="color:blue">PUT</h1>
 
-/v1/animals/5e4e1b0316577a22d811a06e
+/v1/animals/5e4e9553734ae947c5702950
 
 Com o seguite Body:
 ```
 {
-	"age": 19
+	"age": 20
 }
 ```

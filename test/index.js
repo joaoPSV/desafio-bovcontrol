@@ -1,6 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+
 const app = require('../routes/animals');
+const models = require('../models/animals');
 
 chai.use(chaiHttp);
 chai.should();
@@ -8,7 +10,7 @@ chai.should();
 describe('Animals', () => {
     describe("GET /v1/animals/:id", () => {
         it("Get an existing animal", (done) => {
-            const id = '5e4da4ca221bfa228cbb3661';
+            const id = '5e4e9553734ae947c5702950';
             chai.request(app)
                 .get(`/v1/animals/${id}`)
                 .end((err, res) => {
@@ -49,21 +51,23 @@ describe('Animals', () => {
     describe("POST /v1/animals", () => {
         it("Create an animal", (done) => {
             const data = {
-                name: "Vaca02",
-                type: "COW",
-                age: 18,
-                weight: 58
+                name: "Galinha 72",
+                type: "CHICKEN",
+                age: 2,
+                weight: 0.8
             };
             chai.request(app)
                 .post(`/v1/animals`)
                 .send(data)
                 .end((err, res) => {
                     res.should.have.status(201);
+                    res.body.should.have.property('id')
                     res.body.should.have.property('age');
                     res.body.should.have.property('name');
                     res.body.should.have.property('weight');
                     res.body.should.have.property('type');
                     res.body.should.be.a('object');
+                    models.remove(res.body.id);
                     done();
                 });
             
@@ -140,9 +144,9 @@ describe('Animals', () => {
 
     describe("PUT /v1/animals/:id", () => {
         it("Update an existing animal", (done) => {
-            const id = '5e4da4ca221bfa228cbb3661';
+            const id = '5e4e9553734ae947c5702950';
             const data = {
-                name: 'Vaca02',
+                age: 19,
             };
             chai.request(app)
                 .put(`/v1/animals/${id}`)
@@ -175,7 +179,7 @@ describe('Animals', () => {
         });
 
         it("Try to update with a invalid param", (done) => {
-            const id = '5e4da4ca221bfa228cbb3661';
+            const id = '5e4e9553734ae947c5702950';
             const data = {
                 age: 'Vaca',
             };
@@ -190,7 +194,7 @@ describe('Animals', () => {
         });
 
         it("Try to update with a empty param", (done) => {
-            const id = '5e4da4ca221bfa228cbb3661';
+            const id = '5e4e9553734ae947c5702950';
             const data = {
                 age: null,
                 name: "TESTE"
@@ -206,7 +210,7 @@ describe('Animals', () => {
         });
 
         it("Try to update with a nonexisting param", (done) => {
-            const id = '5e4da4ca221bfa228cbb3661';
+            const id = '5e4e9553734ae947c5702950';
             const data = {
                 test: 123
             };

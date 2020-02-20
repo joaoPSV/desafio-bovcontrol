@@ -1,5 +1,6 @@
-const controller = require('./routes/animals');
 require('dotenv').config();
+
+const controller = require('./routes/animals');
 
 const port = process.env.PORT || 8080;
 

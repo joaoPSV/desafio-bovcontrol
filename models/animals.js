@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const animalTypes = require('../enums/animalTypes');
 
@@ -62,5 +63,9 @@ module.exports = {
         data["updatedAt"] = new Date().getTime();
         let result = await animalModel.findOneAndUpdate({ '_id': id }, data, { new: true });
         return result;
+    },
+
+    remove: async (id) => {
+        await animalModel.findByIdAndDelete(id);
     }
 };

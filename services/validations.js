@@ -56,7 +56,7 @@ const formatException = (errors) => {
 
 module.exports = {
     createAnimal: Joi.object({
-        name: Joi.string().min(3).alphanum().required(),
+        name: Joi.string().min(3).required(),
 
         age: Joi.number().integer().min(0).required(),
 
@@ -66,7 +66,7 @@ module.exports = {
     }).error(errors => formatException(errors)),
 
     updateAnimal: Joi.object({
-        name: Joi.string().min(3).alphanum(),
+        name: Joi.string().min(3),
 
         age: Joi.number().integer().positive(),
 
